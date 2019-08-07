@@ -1,3 +1,7 @@
+/*
+Linked List implementation in Java
+*/
+
 import java.io.*;
 
 class node {
@@ -44,21 +48,44 @@ class list {
 		}
 		System.out.println();
 	}
+
+
 }
 
 public class LinkedList {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.print("Enter the size of the Linked List: ");
 		int n = Integer.parseInt(br.readLine());	//size of the linked list
 		list l = new list();
 
 		//input n integers and add them to the list
+		System.out.println("Enter the elements of the Linked List: ");
 		String[] s = br.readLine().trim().split("\\s+");
 		for (int i=0; i<n; i++) {
 			l.addNode(Integer.parseInt(s[i]));
 		}
 
-		//printing the list
-		l.printList();
+		System.out.print("Enter the number of queries: ");
+		int q = Integer.parseInt(br.readLine());
+
+		System.out.println("1 : Print the list \n2 x: Insert x in the end of the list");
+
+		/*
+		1: Prints the Linked List
+		2 x: Adds the element x to the end of the list
+		*/
+		for (int i=0; i<q; i++) {
+			s = br.readLine().trim().split("\\s+");
+			int query = Integer.parseInt(s[0]);
+
+			//Query Check
+			if (query == 1)
+				l.printList();
+			else if (query == 2) {
+				int param = Integer.parseInt(s[1]);	//parameter variable to the query
+				l.addNode(param);
+			}
+		}
 	}
 }
