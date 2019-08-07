@@ -36,7 +36,7 @@ class list {
 			ptr.next = temp;
 		}
 
-		this.size++;
+		this.size++;	//increase the size of the list by one
 	}
 
 	//method to print the list
@@ -49,6 +49,29 @@ class list {
 		System.out.println();
 	}
 
+	//method to delete node present at index x(starting from 0)
+	void deleteNode(int x) {
+
+		//checks if the passed index is in the list; if not, the program terminates
+		if (x>this.size-1){
+			System.out.println("Index out of range");
+			System.exit(0);
+		}
+
+		if (x==0)
+			head = head.next;	//for the removal of the first elements; x=0
+		else {
+			node ptr = head;
+			//traverse till the index previous to the passed index and attach that previous index to next of the next index
+			for (int i=0; i<x-1; i++) {
+				ptr = ptr.next;
+			}
+			ptr.next = ptr.next.next;
+		}
+
+		this.size--;	//decrease the size of the list by one
+
+	}
 
 }
 
@@ -62,6 +85,13 @@ public class LinkedList {
 		//input n integers and add them to the list
 		System.out.println("Enter the elements of the Linked List: ");
 		String[] s = br.readLine().trim().split("\\s+");
+
+		//Checks if the amount of entered number of elements is same as n; if not, the program terminates
+		if (s.length < n  || s.length > n) {
+			System.out.println("Inappropriate amount of elements");
+			System.exit(0);
+		}
+
 		for (int i=0; i<n; i++) {
 			l.addNode(Integer.parseInt(s[i]));
 		}
@@ -69,12 +99,13 @@ public class LinkedList {
 		System.out.print("Enter the number of queries: ");
 		int q = Integer.parseInt(br.readLine());
 
-		System.out.println("1 : Print the list \n2 x: Insert x in the end of the list");
-
 		/*
 		1: Prints the Linked List
 		2 x: Adds the element x to the end of the list
+		3 x: Deletes the element at index x
 		*/
+		System.out.println("1 : Print the list \n2 x: Insert x in the end of the list \n3 x: Delete element at index x");
+
 		for (int i=0; i<q; i++) {
 			s = br.readLine().trim().split("\\s+");
 			int query = Integer.parseInt(s[0]);
@@ -85,6 +116,9 @@ public class LinkedList {
 			else if (query == 2) {
 				int param = Integer.parseInt(s[1]);	//parameter variable to the query
 				l.addNode(param);
+			} else if (query == 3){
+				int param = Integer.parseInt(s[1]);
+				l.deleteNode(param);
 			}
 		}
 	}
