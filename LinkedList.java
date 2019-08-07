@@ -51,7 +51,6 @@ class list {
 
 	//method to delete node present at index x(starting from 0)
 	void deleteNode(int x) {
-
 		//checks if the passed index is in the list; if not, the program terminates
 		if (x>this.size-1){
 			System.out.println("Index out of range");
@@ -73,6 +72,22 @@ class list {
 
 	}
 
+	//method to modify data of a node present at index x(starting from 0) to data y
+	void modifyNode(int x, int y) {
+		//checks if the passed index is in the list; if not, the program terminates
+		if (x>this.size-1){
+			System.out.println("Index out of range");
+			System.exit(0);
+		}
+
+		node ptr = head;
+		for (int i=0; i<x; i++) {
+			ptr = ptr.next;
+		}
+		ptr.data = y;
+
+	}
+
 }
 
 public class LinkedList {
@@ -83,7 +98,7 @@ public class LinkedList {
 		list l = new list();
 
 		//input n integers and add them to the list
-		System.out.println("Enter the elements of the Linked List: ");
+		System.out.println("\nEnter the elements of the Linked List: ");
 		String[] s = br.readLine().trim().split("\\s+");
 
 		//Checks if the amount of entered number of elements is same as n; if not, the program terminates
@@ -96,15 +111,16 @@ public class LinkedList {
 			l.addNode(Integer.parseInt(s[i]));
 		}
 
-		System.out.print("Enter the number of queries: ");
+		System.out.print("\nEnter the number of queries: ");
 		int q = Integer.parseInt(br.readLine());
 
 		/*
 		1: Prints the Linked List
 		2 x: Adds the element x to the end of the list
 		3 x: Deletes the element at index x
+		4 x y: Changes the value at index x to value y
 		*/
-		System.out.println("1 : Print the list \n2 x: Insert x in the end of the list \n3 x: Delete element at index x");
+		System.out.println("\n1 : Print the list \n2 x: Insert x in the end of the list \n3 x: Delete element at index x \n4 x y:Change value at index x to value y");
 
 		for (int i=0; i<q; i++) {
 			s = br.readLine().trim().split("\\s+");
@@ -116,9 +132,13 @@ public class LinkedList {
 			else if (query == 2) {
 				int param = Integer.parseInt(s[1]);	//parameter variable to the query
 				l.addNode(param);
-			} else if (query == 3){
+			} else if (query == 3) {
 				int param = Integer.parseInt(s[1]);
 				l.deleteNode(param);
+			} else if (query == 4) {
+				int param1 = Integer.parseInt(s[1]);	//index parameter
+				int param2 = Integer.parseInt(s[2]);	//new value parameter
+				l.modifyNode(param1, param2);
 			}
 		}
 	}
