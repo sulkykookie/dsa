@@ -2,4 +2,5 @@
 
 A repository consisting of few of the Data Structures and Algorithms.  
 Contains:  
--LinkedList  
+- LinkedList   
+- BFS and DFS on unweighted directed Graphs
